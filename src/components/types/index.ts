@@ -6,7 +6,7 @@ export type AlertType = 'success' | 'error' | 'warning' | 'info';
 export interface AlertBoxProps {
     type: AlertType;
     message: string;
-    onClick?: () => void;
+    onClose?: () => void;
     children?: React.ReactNode;
 }
 
