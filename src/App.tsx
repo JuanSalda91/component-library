@@ -1,4 +1,4 @@
-import { UserProfileCard } from './components/UserprofileCard/UserProfileCard';
+import { UserProfileCard } from './components/UserProfileCard/UserProfileCard';
 import { AlertBox } from './components/AlertBox/AlertBox'
 import './App.css'
 
