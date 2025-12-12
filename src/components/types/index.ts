@@ -33,7 +33,7 @@ export interface Product {
     name: string;
     price: number;
     description: string;
-    imageUr?: string;
+    imageUrl?: string;
     inStock?: boolean;
 }
 
