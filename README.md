@@ -1,73 +1,19 @@
-# React + TypeScript + Vite
+# Componet Library
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Lab Overview
 
-Currently, two official plugins are available:
+In this lab, you will create a set of reusable UI components for your company’s internal component library. You will practice creating TypeScript React components with proper prop typing, component composition, and prop handling. This lab focuses on component creation, TypeScript interfaces, prop handling, and component composition using React and TypeScript.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Reflection
 
-## React Compiler
+1. How did you handle optional props in your components?
+  I used the ? operator in the TypeScript interfaces (e.g., showEmail?: boolean) to mark props as optional. Inside the components, I used conditional rendering (like {showEmail && ...} or ternary operators) to display content only when those props were provided, and standard conditional checks for optional callbacks (e.g., onClose && onClose()).
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+2. What considerations did you make when designing the component interfaces?
+  I focused on reusability and clarity by separating data objects (like User and Product) from UI configuration props (like showRole or showStockStatus). I also prioritized type safety by using specific Union Types (e.g., 'success' | 'error') for the AlertBox to preventing invalid states, rather than allowing any generic string.
 
-## Expanding the ESLint configuration
+3. How did you ensure type safety across your components?
+  I created a central types/index.ts file to define shared interfaces and exported them for use in both the components and the main App. I utilized React.FC<Props> to enforce that each component received exactly the correct data shape, ensuring that properties like product.price were treated as numbers for math operations and children were handled as React.ReactNode.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+4. What challenges did you face when implementing component composition?
+  The main challenge was correctly passing state and event handlers down from the parent App component into the child components (like onAddToCart). It required ensuring the callback function signatures in the parent matched exactly what the child component interfaces expected (e.g., receiving a productId string vs. no arguments).
